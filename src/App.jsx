@@ -13,6 +13,7 @@ function App() {
       const response = await fetch(BASE_URL+'contest/all')
       const data =await response.json();
       setContest(data.getAll)
+      console.log(data)
     }
     fetchContest()
   },[])
