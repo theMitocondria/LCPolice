@@ -5,11 +5,11 @@ import { TelegramSolution } from '../Context/TelegramSolContext.jsx';
 const ContestComponent = ({ name, question3Cheater, question4Cheater , cheated3sol, cheated4sol}) => {
   const { setTeleSol } = useContext(TelegramSolution);
   const navigate = useNavigate(); // Use the navigate hook
-
+  console.log({name, question3Cheater, question4Cheater , cheated3sol, cheated4sol})
   const url = "/data/" + name.replaceAll(' ', '-');
 
   const handleLinkClick = (solfromtele, path) => {
-    //console.log(solfromtele)
+    console.log(solfromtele)
     setTeleSol(solfromtele);
     localStorage.setItem('telsol', solfromtele)
     navigate(path); // Navigate after updating state

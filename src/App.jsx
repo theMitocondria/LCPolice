@@ -39,7 +39,7 @@ function App() {
           </div>
           <div>
             {contests?.map((contest, ind) => {
-              return <ContestComponent key={ind} cheated3sol={contest.cheated3sol} cheated4sol={contest.cheated4sol} name={contest.name} question3Cheater={contest.question3.length} question4Cheater={contest.question4.length} />
+              return <ContestComponent key={ind} cheated3sol={contest.cheated3Sol} cheated4sol={contest.cheated4Sol} name={contest.name} question3Cheater={contest.question3.length} question4Cheater={contest.question4.length} />
             })}
           </div>
         </div>
