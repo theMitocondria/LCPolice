@@ -78,7 +78,7 @@ function Data() {
                     <span className="font-medium text-lg md:text-xl">Search suspicious:</span> Can't find someone you suspect? Don't worry, our hardware is constantly being upgraded to catch more cheaters.
                 </p>
                 <p>
-                    <span className="font-medium text-lg md:text-xl">Request:</span> This app is still under beta testing, so there might be a few cases where code matches aren't perfect. Try searching for different users to see its effectiveness. We're constantly improving, so thanks for your patience!
+                    <span className="font-medium text-lg md:text-xl">Request:</span> This app is still under beta testing, so there might be a few cases where code matches aren't perfect! <span className=" text-red-500  font-bold">So we are sorry if you are a legit person and still in the list , you can mail us at leetcodePolice@gmail.com </span>, we will remove you .
                 </p>
             </div>
             <div className="px-2 md:px-4 overflow-x-auto">
