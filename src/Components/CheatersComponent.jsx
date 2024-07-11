@@ -43,13 +43,13 @@ const CheatersComponent = ({ rank, username, plagPercentage, contestName, index,
 
   return (
     <div className={`flex items-center py-2 mt-2 rounded-sm h-12 text-gray-100 font-medium text-lg w-full ${isEven ? 'bg-[#979bf0b5]' : 'bg-[#7f7fd2b3]'}`}>
-      <div className="w-1/5 flex justify-center">{rank}</div>
-      <div className="w-1/5 flex justify-center">{username}</div>
-      <div className="w-1/5 flex justify-center">{(plagPercentage * 100).toFixed(2)} %</div>
-     <div className=' w-1/5  flex justify-center'>
+      <div className="hidden w-1/3 md:w-1/5 md:flex justify-center">{rank}</div>
+      <div className=" w-1/3 md:w-1/5 flex justify-center">{username}</div>
+      <div className="hidden w-1/3  md:w-1/5 md:flex justify-center">{(plagPercentage * 100).toFixed(2)} %</div>
+     <div className=' w-1/3  md:w-1/5  flex justify-center'>
      <button onClick={handleGetCode} className=" px-5 py-[0.5px] rounded-md bg-gray-400  flex justify-center">Code</button>
      </div>
-      <div className='w-1/5 flex justify-center'>
+      <div className='w-1/3  md:w-1/5 md:flex justify-center'>
         <Link
           target='_blank'
           to={`https://leetcode.com/contest/${contestName}/ranking/${Math.ceil(rank / 25)}`}
