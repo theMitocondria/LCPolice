@@ -46,7 +46,9 @@ const CheatersComponent = ({ rank, username, plagPercentage, contestName, index,
       <div className="w-1/5 flex justify-center">{rank}</div>
       <div className="w-1/5 flex justify-center">{username}</div>
       <div className="w-1/5 flex justify-center">{(plagPercentage * 100).toFixed(2)} %</div>
-      <button onClick={handleGetCode} className="w-1/5 flex justify-center">Code</button>
+     <div className=' w-1/5  flex justify-center'>
+     <button onClick={handleGetCode} className=" px-5 py-[0.5px] rounded-md bg-gray-400  flex justify-center">Code</button>
+     </div>
       <div className='w-1/5 flex justify-center'>
         <Link
           target='_blank'

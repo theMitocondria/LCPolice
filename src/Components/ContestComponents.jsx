@@ -9,7 +9,7 @@ const ContestComponent = ({ name, question3Cheater, question4Cheater , cheated3s
   const url = "/data/" + name.replaceAll(' ', '-');
 
   const handleLinkClick = (solfromtele, path) => {
-    console.log(solfromtele)
+    //console.log(solfromtele)
     setTeleSol(solfromtele);
     localStorage.setItem('telsol', solfromtele)
     navigate(path); // Navigate after updating state

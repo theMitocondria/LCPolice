@@ -5,15 +5,22 @@ import App from './App.jsx';
 import Data from './Data.jsx';
 import './index.css';
 import TelegramSolutionContext from './Context/TelegramSolContext.jsx'; // Correctly import the context provider
+import Header from './Header.jsx';
 
 const AppRouter = createBrowserRouter([
   {
     path: '/',
-    element: <App />
+    element: <>
+      <Header />
+      <App />
+    </>
   },
   {
     path: '/data/:name',
-    element: <Data />,
+    element: <>
+      <Header />
+      <Data />
+    </>,
     children: [
       {
         path: '3',
