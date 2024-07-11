@@ -1,9 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import Data from './Data.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import App from './App.jsx';
+import Data from './Data.jsx';
+import './index.css';
+import TelegramSolutionContext from './Context/TelegramSolContext.jsx'; // Correctly import the context provider
 
 const AppRouter = createBrowserRouter([
   {
@@ -24,8 +25,10 @@ const AppRouter = createBrowserRouter([
       }
     ]
   }
-])
+]);
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(<RouterProvider router={AppRouter} />);
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <TelegramSolutionContext>
+    <RouterProvider router={AppRouter} />
+  </TelegramSolutionContext>
+);

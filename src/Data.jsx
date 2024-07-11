@@ -27,7 +27,7 @@ function Data() {
 
   }, []);
 
-  async function fetchUser(e) {
+  async function searchUser(e) {
     if (!e.target.value) {
       setError(null), setSearchedUser([]);
       return;
@@ -35,8 +35,10 @@ function Data() {
 
 
     
+
+    
   }
-  const handleSearchUser = debounce(fetchUser, 300);
+  const handleSearchUser = debounce(searchUser, 300);
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
