@@ -6,6 +6,7 @@ import Data from './Data.jsx';
 import './index.css';
 import TelegramSolutionContext from './Context/TelegramSolContext.jsx'; // Correctly import the context provider
 import Header from './Header.jsx';
+import { Analytics } from '@vercel/analytics/react';
 
 const AppRouter = createBrowserRouter([
   {
@@ -37,5 +38,6 @@ const AppRouter = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <TelegramSolutionContext>
     <RouterProvider router={AppRouter} />
+    <Analytics />
   </TelegramSolutionContext>
 );

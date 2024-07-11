@@ -74,13 +74,13 @@ const CheatersComponent = ({ rank, username, plagPercentage, contestName, index,
               <pre className="overflow-auto max-h-[80vh] w-1/2  text-black bg-gray-100 rounded-md">
                 <p className='font-bold p-2 bg-black  text-white'>Telegram Solution</p>
                <div className='p-2'>
-               {teleSol || 'No solution from Telegram context'}
+               {teleSol || 'Loading telegram solution ...'}
                </div>
               </pre>
               <pre className="overflow-auto max-h-[80vh] w-1/2 text-black bg-gray-100 rounded-md">
               <p className='font-bold bg-black p-2  text-white'>User Solution</p>
                <div className='p-2'>
-               {cheaterSol || 'No solution from cheater'}
+               {cheaterSol || 'loading user solution....'}
                 </div>
               </pre>
             </div>
