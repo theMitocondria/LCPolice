@@ -1,27 +1,28 @@
 
 import { useEffect, useState } from "react";
-import { Link, useParams, useLocation } from "react-router-dom";
+import {  useLocation } from "react-router-dom";
 import debounce from "./hooks/useDebounce";
 import { BASE_URL } from "./CONSTANTS/urls";
 import CheatersComponent from "./Components/CheatersComponent";
-import { PiFunctionThin } from "react-icons/pi";
+
 function Data() {
   const [searchName, setSearchName] = useState("");
   const [error, setError] = useState(null);
   const [searchedUser, setSearchedUser] = useState([]);
-
+  const [allData , setallData] = useState([]);
   const [cheaters, setCheaters] = useState(null);
   let location = useLocation();
   location = location.pathname.slice(6);
 
   const contestName = location.replaceAll('-', ' ')
-  console.log(location);
+//   console.log(location);
 
   useEffect(() => {
     async function fetchCheaters() {
       let response = await fetch(BASE_URL + "/contests/" + location);
       let cheaters = await response.json();
       setCheaters(cheaters.cheaters_sol);
+      setallData(cheaters.cheaters_sol);
     }
     fetchCheaters();
 
@@ -29,16 +30,17 @@ function Data() {
 
   async function searchUser(e) {
     if (!e.target.value) {
+      setCheaters(allData);
       setError(null), setSearchedUser([]);
       return;
-    }
-
-
-    
-
-    
+    } 
+    const searchedCheaters = allData.filter((curr)=>{
+        if(curr.username.includes(e.target.value))return curr;
+    })
+    // console.log(searchedCheaters);
+    setCheaters(searchedCheaters);
   }
-  const handleSearchUser = debounce(searchUser, 300);
+  const handleSearchUser = debounce(searchUser, 500);
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

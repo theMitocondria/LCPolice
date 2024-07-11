@@ -9,7 +9,7 @@ const CheatersComponent = ({ rank, username, plagPercentage, contestName, index,
   let { teleSol, setTeleSol} = useContext(TelegramSolution);
   const [cheaterSol, setCheaterSol] = useState(null);
   const [modal, setModal] = useState(false);
-  console.log(teleSol)
+  // console.log(teleSol)
   if(!teleSol) {setTeleSol(localStorage.getItem('telsol')); }
 
   // Adjusting contestName as per your requirement
@@ -58,12 +58,14 @@ const CheatersComponent = ({ rank, username, plagPercentage, contestName, index,
       </div>
 
       {modal && (
-        <div className="fixed top-0 left-0  w-full h-full flex items-center  bg-gray-800 bg-opacity-75" onClick={handleOverlayClick}>
+        <div className="fixed top-0 left-0  w-full h-full flex items-center justify-center  bg-gray-800 bg-opacity-75" onClick={handleOverlayClick}>
          
-          <div className="bg-transparent p-4 rounded-lg w-full max-w-4xl">
+          <div className=" bg-transparent p-4 rounded-lg">
             <div className="flex justify-between items-center">
               
               <h2 className="text-lg font-semibold text-white">Solution</h2>
+              <h2 className="text-lg font-semibold text-white cursor-pointer" onClick={closeModal}>Close</h2>
+              
       
             </div>
             <div className="flex  space-x-4 mt-2 w-[80vw]">
