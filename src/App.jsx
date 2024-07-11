@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 
 import { BASE_URL } from "./CONSTANTS/urls";
@@ -7,12 +6,15 @@ import Developers from "./Components/Developers.jsx";
 
 function App() {
   const [contests, setContest] = useState([]);
+  const [loading, setLoading] = useState(true); // Add loading state
+
   useEffect(() => {
     async function fetchContest() {
+      setLoading(true); // Set loading to true before fetching data
       const response = await fetch(BASE_URL + 'contest/all');
       const data = await response.json();
       setContest(data.getAll);
-      console.log(data);
+      setLoading(false); // Set loading to false after fetching data
     }
     fetchContest();
   }, []);
@@ -32,16 +34,18 @@ function App() {
           </p>
         </div>
         <div className="px-2 md:px-4">
-          <div className="text-white flex  justify-between font-semibold text-lg md:text-xl">
+          <div className="text-white flex justify-between font-semibold text-lg md:text-xl">
             <div className="md:pl-4 w-2/3">Contests</div>
-            <div className="w-1/3 flex justify-evenly  md:mt-0">
+            <div className="w-1/3 flex justify-evenly md:mt-0">
               <div>Q3</div>
               <div>Q4</div>
             </div>
           </div>
           <div>
-            {contests?.map((contest, ind) => {
-              return (
+            {loading ? ( // Conditionally render the loading indicator or the contest data
+              <div className="text-white text-center mt-8">Loading...</div>
+            ) : (
+              contests?.map((contest, ind) => (
                 <ContestComponent
                   key={ind}
                   cheated3sol={contest.cheated3Sol}
@@ -50,8 +54,8 @@ function App() {
                   question3Cheater={contest.question3.length}
                   question4Cheater={contest.question4.length}
                 />
-              );
-            })}
+              ))
+            )}
           </div>
         </div>
       </div>
