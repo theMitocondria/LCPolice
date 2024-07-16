@@ -1,29 +1,30 @@
-
-// const Header = ()=>{
-//     return (
-//         <div className=" h-8  bg-gray-500 flex items-center justify-evenly">
-//             <p className=" text-white font-bold">Save the Sport</p>
-//             <p className=" text-white font-bold">Everyone should have fair chance</p>
-//             <p className=" text-white font-bold">Contribute by reporting </p>
-//         </div>
-//     )
-// }
-
-// export default Header;
-
-// //help yourself by reporting cheaters
-// // save the sport
-// //
+import { navigation } from "./CONSTANTS";
 
 const Header = () => {
-    return (
-      <div className="h-auto py-1 bg-gray-500 flex flex-col md:flex-row items-center justify-evenly p-2">
-        <p className="text-white font-bold text-center md:text-left">Save the Sport</p>
-        <p className="text-white font-bold text-center md:text-left">Everyone should have fair chance</p>
-        <p className="text-white font-bold text-center md:text-left">Contribute by reporting</p>
+  return (
+    <div
+      className={` w-full z-50 border-b border-n-6 lg:bg-n-8/90 lg:backdrop-blur-sm bg-n-8 
+      }`}
+    >
+      <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-10">
+        <nav
+          className={`top-[5rem] left-0 right-0 bottom-0 flex mx-auto lg:bg-transparent`}
+        >
+          <div className="relative z-2 flex items-center justify-center m-auto flex-col lg:flex-row">
+            {navigation.map((item) => (
+              <div
+                key={item.id}
+                href={item.url}
+                className={`block relative font-code text-xl uppercase text-n-1/50 transition-colors hover:text-color-1 px-6 py-2 lg:py-6 lg:-mr-0.25 lg:text-sm lg:font-semibold lg:text-n-1/50 lg:leading-5 lg:hover:text-n-1 xl:px-12 text-center`}
+              >
+                {item.title}
+              </div>
+            ))}
+          </div>
+        </nav>
       </div>
-    );
-  }
-  
-  export default Header;
-  
+    </div>
+  );
+};
+
+export default Header;

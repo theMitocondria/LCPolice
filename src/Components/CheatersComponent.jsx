@@ -6,11 +6,11 @@ import { TelegramSolution } from '../Context/TelegramSolContext';
 const CheatersComponent = ({ rank, username, plagPercentage, contestName, index, questionNumber }) => {
 
   const isEven = index % 2 === 0;
-  let { teleSol, setTeleSol} = useContext(TelegramSolution);
+  let { teleSol, setTeleSol } = useContext(TelegramSolution);
   const [cheaterSol, setCheaterSol] = useState(null);
   const [modal, setModal] = useState(false);
   // console.log(teleSol)
-  if(!teleSol) {setTeleSol(localStorage.getItem('telsol')); }
+  if (!teleSol) { setTeleSol(localStorage.getItem('telsol')); }
 
   // Adjusting contestName as per your requirement
   let actualContestName = "leetcode " + contestName;
@@ -42,13 +42,13 @@ const CheatersComponent = ({ rank, username, plagPercentage, contestName, index,
   };
 
   return (
-    plagPercentage >= 0.85 ? (<div className={`flex items-center py-2 mt-2 rounded-sm h-12 text-gray-100 font-medium text-lg w-full ${isEven ? 'bg-[#979bf0b5]' : 'bg-[#7f7fd2b3]'}`}>
+    plagPercentage >= 0.85 ? (<div className={`flex items-center py-2 mt-2 rounded-sm h-12 text-gray-100 font-medium text-lg w-full ${isEven ? 'bg-n-10' : 'bg-n-11'}`}>
       <div className="hidden w-1/3 md:w-1/5 md:flex justify-center">{rank}</div>
-      <div className=" w-1/3 md:w-1/5 flex justify-center">{username}</div>
+      <div className=" w-1/3 md:w-1/5 flex justify-center break-all text-center">{username}</div>
       <div className="hidden w-1/3  md:w-1/5 md:flex justify-center">{(plagPercentage * 100).toFixed(2)} %</div>
-     <div className=' w-1/3  md:w-1/5  flex justify-center'>
-     <button onClick={handleGetCode} className=" px-5 py-[0.5px] rounded-md bg-gray-400  flex justify-center">Code</button>
-     </div>
+      <div className=' w-1/3  md:w-1/5  flex justify-center'>
+        <button onClick={handleGetCode} className=" px-5 py-[0.5px] rounded-md bg-gray-400  flex justify-center">Code</button>
+      </div>
       <div className='w-1/3  md:w-1/5 md:flex justify-center'>
         <Link
           target='_blank'
@@ -60,27 +60,27 @@ const CheatersComponent = ({ rank, username, plagPercentage, contestName, index,
       </div>
 
       {modal && (
-        <div className="fixed top-0 left-0  w-full h-full flex items-center justify-center  bg-gray-800 bg-opacity-75" onClick={handleOverlayClick}>
-         
+        <div className="fixed top-0 left-0 w-full h-full flex items-start justify-center bg-gray-800 " onClick={handleOverlayClick}>
+
           <div className=" bg-transparent p-4 rounded-lg">
             <div className="flex justify-between items-center">
-              
+
               <h2 className="text-lg font-semibold text-white">Solution</h2>
               <h2 className="text-lg font-semibold text-white cursor-pointer" onClick={closeModal}>Close</h2>
-              
-      
+
+
             </div>
-            <div className="flex  space-x-4 mt-2 w-[80vw]">
-              <pre className="overflow-auto max-h-[80vh] w-1/2  text-black bg-gray-100 rounded-md">
+            <div className="flex lg:space-x-4 mt-2 w-[90vw] flex-col lg:flex-row gap-2">
+              <pre className="overflow-auto h-96 lg:h-[80vh] w-full lg:w-1/2  text-black bg-gray-100 rounded-md">
                 <p className='font-bold p-2 bg-black  text-white'>Telegram Solution</p>
-               <div className='p-2'>
-               {teleSol || 'Loading telegram solution ...'}
-               </div>
+                <div className='p-2 text-sm'>
+                  {teleSol || 'Loading telegram solution ...'}
+                </div>
               </pre>
-              <pre className="overflow-auto max-h-[80vh] w-1/2 text-black bg-gray-100 rounded-md">
-              <p className='font-bold bg-black p-2  text-white'>User Solution</p>
-               <div className='p-2'>
-               {cheaterSol || 'loading user solution....'}
+              <pre className="overflow-auto h-96 lg:h-[80vh] w-full lg:w-1/2 text-black bg-gray-100 rounded-md">
+                <p className='font-bold bg-black p-2 w-full text-white'>User Solution</p>
+                <div className='p-2 text-sm'>
+                  {cheaterSol || 'loading user solution....'}
                 </div>
               </pre>
             </div>

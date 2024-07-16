@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TelegramSolution } from '../Context/TelegramSolContext.jsx';
 
-const ContestComponent = ({ name, question3Cheater, question4Cheater , cheated3sol, cheated4sol}) => {
+const ContestComponent = ({ name, question3Cheater, question4Cheater, cheated3sol, cheated4sol }) => {
   const { setTeleSol } = useContext(TelegramSolution);
   const navigate = useNavigate(); // Use the navigate hook
-  console.log({name, question3Cheater, question4Cheater , cheated3sol, cheated4sol})
+  console.log({ name, question3Cheater, question4Cheater, cheated3sol, cheated4sol })
   const url = "/data/" + name.replaceAll(' ', '-');
 
   const handleLinkClick = (solfromtele, path) => {
@@ -16,7 +16,7 @@ const ContestComponent = ({ name, question3Cheater, question4Cheater , cheated3s
   };
 
   return (
-    <div className="flex items-center justify-between bg-[#979bf0ac] p-2 px-12 m-2 rounded-sm text-gray-100 font-medium text-lg w-full">
+    <div className="flex items-center justify-between bg-n-10 p-2 px-12 m-2 rounded-sm text-gray-100 font-medium text-lg w-full rounded-xl">
       <div className="w-[60%]">{name}</div>
       <div className="w-[30%] flex justify-evenly">
         <div
