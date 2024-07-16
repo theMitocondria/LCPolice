@@ -42,7 +42,7 @@ const CheatersComponent = ({ rank, username, plagPercentage, contestName, index,
   };
 
   return (
-    plagPercentage >= 0.85 ? (<div className={`flex items-center py-2 mt-2 rounded-xl h-16 text-gray-100 font-medium text-lg w-full bg-n-10 md:h-12 `}>
+    plagPercentage >= 0.85 ? (<div className={`flex items-center py-2 mt-2 rounded-sm h-12 text-gray-100 font-medium text-lg w-full ${isEven ? 'bg-n-10' : 'bg-n-11'}`}>
       <div className="hidden w-1/3 md:w-1/5 md:flex justify-center">{rank}</div>
       <div className=" w-1/3 md:w-1/5 flex justify-center break-all text-center">{username}</div>
       <div className="hidden w-1/3  md:w-1/5 md:flex justify-center">{(plagPercentage * 100).toFixed(2)} %</div>
