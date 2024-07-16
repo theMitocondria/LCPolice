@@ -1,5 +1,4 @@
 import { curve } from "../assets";
-import Button from "../Components/Button";
 import Section from "../design/Section";
 import { BottomLine } from "../design/Hero";
 

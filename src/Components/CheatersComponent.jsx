@@ -42,7 +42,7 @@ const CheatersComponent = ({ rank, username, plagPercentage, contestName, index,
   };
 
   return (
-    plagPercentage >= 0.85 ? (<div className={`flex items-center py-2 mt-2 rounded-xl h-16 text-gray-100 font-medium text-lg w-full bg-n-10 md:h-12`}>
+    plagPercentage >= 0.85 ? (<div className={`flex items-center py-2 mt-2 rounded-xl h-16 text-gray-100 font-medium text-lg w-full bg-n-10 md:h-12 `}>
       <div className="hidden w-1/3 md:w-1/5 md:flex justify-center">{rank}</div>
       <div className=" w-1/3 md:w-1/5 flex justify-center break-all text-center">{username}</div>
       <div className="hidden w-1/3  md:w-1/5 md:flex justify-center">{(plagPercentage * 100).toFixed(2)} %</div>
@@ -60,7 +60,7 @@ const CheatersComponent = ({ rank, username, plagPercentage, contestName, index,
       </div>
 
       {modal && (
-        <div className="fixed top-0 left-0  w-full h-full flex items-center justify-center  bg-gray-800 bg-opacity-75" onClick={handleOverlayClick}>
+        <div className="fixed top-0 left-0 w-full h-full flex items-start justify-center bg-gray-800 " onClick={handleOverlayClick}>
 
           <div className=" bg-transparent p-4 rounded-lg">
             <div className="flex justify-between items-center">
@@ -71,15 +71,15 @@ const CheatersComponent = ({ rank, username, plagPercentage, contestName, index,
 
             </div>
             <div className="flex lg:space-x-4 mt-2 w-[90vw] flex-col lg:flex-row gap-2">
-              <pre className="overflow-auto h-96 lg:h-[80vh] lg:w-1/2  text-black bg-gray-100 rounded-md">
+              <pre className="overflow-auto h-96 lg:h-[80vh] w-full lg:w-1/2  text-black bg-gray-100 rounded-md">
                 <p className='font-bold p-2 bg-black  text-white'>Telegram Solution</p>
-                <div className='p-2'>
+                <div className='p-2 text-sm'>
                   {teleSol || 'Loading telegram solution ...'}
                 </div>
               </pre>
-              <pre className="overflow-auto h-96 lg:h-[80vh] lg:w-1/2 text-black bg-gray-100 rounded-md">
-                <p className='font-bold bg-black p-2  text-white'>User Solution</p>
-                <div className='p-2'>
+              <pre className="overflow-auto h-96 lg:h-[80vh] w-full lg:w-1/2 text-black bg-gray-100 rounded-md">
+                <p className='font-bold bg-black p-2 w-full text-white'>User Solution</p>
+                <div className='p-2 text-sm'>
                   {cheaterSol || 'loading user solution....'}
                 </div>
               </pre>
