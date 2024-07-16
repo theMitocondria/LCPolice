@@ -16,7 +16,8 @@ const Hero = () => {
                     <h1 className="h2 mb-10">
                         Level up Fairly ! <br></br>Tired of contests rigged by cheaters? <br></br>We are too.<br></br><br></br> Introducing {" "}
                         <span className="inline-block relative">
-                            LC Police{" "}
+                            LC Police 
+                             {" "}
                             <img
                                 src={curve}
                                 className="absolute top-full left-0 w-full xl:-mt-2"
