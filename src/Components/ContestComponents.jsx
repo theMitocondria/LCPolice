@@ -2,18 +2,21 @@ import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TelegramSolution } from '../Context/TelegramSolContext.jsx';
 
-const ContestComponent = ({ name, question3Cheater, question4Cheater, cheated3sol, cheated4sol }) => {
-  const { setTeleSol } = useContext(TelegramSolution);
-  const navigate = useNavigate(); // Use the navigate hook
-  console.log({ name, question3Cheater, question4Cheater, cheated3sol, cheated4sol })
-  const url = "/data/" + name.replaceAll(' ', '-');
+const ContestComponent = ({ name, question3Cheater, question4Cheater,  telegram3Sol ,  telegram4Sol, question3Id, question4Id}) => {
 
-  const handleLinkClick = (solfromtele, path) => {
-    console.log(solfromtele)
-    setTeleSol(solfromtele);
-    localStorage.setItem('telsol', solfromtele)
-    navigate(path); // Navigate after updating state
-  };
+  const navigate = useNavigate();
+  const {setQuestionId} = useContext(TelegramSolution)
+
+  name = name.replaceAll(' ', '-');
+
+
+  const handleCheatersClick = async(questionId, question) => {
+    setQuestionId(questionId)
+    localStorage.setItem('questionId', questionId);
+   if(question == 3) localStorage.setItem('teleSol', telegram3Sol);
+   else localStorage.setItem('teleSol', telegram4Sol);
+    navigate(`/${name}/cheaters/`)
+  }
 
   return (
     <div className="flex items-center justify-between bg-n-10 p-2 px-12 m-2 rounded-sm text-gray-100 font-medium text-lg w-full rounded-xl">
@@ -21,13 +24,13 @@ const ContestComponent = ({ name, question3Cheater, question4Cheater, cheated3so
       <div className="w-[30%] flex justify-evenly">
         <div
           className="pr-8 underline text-black cursor-pointer"
-          onClick={() => handleLinkClick(cheated3sol, `${url}/3`)}
+          onClick={() => handleCheatersClick(question3Id,3)}
         >
           {question3Cheater}
         </div>
         <div
           className="pl-2 underline text-black cursor-pointer"
-          onClick={() => handleLinkClick(cheated4sol, `${url}/4`)}
+          onClick={() => handleCheatersClick(question4Id, 4)}
         >
           {question4Cheater}
         </div>

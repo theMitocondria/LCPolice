@@ -3,10 +3,11 @@ import React, { createContext, useState } from 'react';
 export const TelegramSolution = createContext();
 
 const TelegramSolutionContext = ({ children }) => {
-  const [teleSol, setTeleSol] = useState(null);
+
+  const [questionId, setQuestionId] = useState(null);
 
   return (
-    <TelegramSolution.Provider value={{ teleSol, setTeleSol }}>
+    <TelegramSolution.Provider value={{ questionId, setQuestionId }}>
       {children}
     </TelegramSolution.Provider>
   );
