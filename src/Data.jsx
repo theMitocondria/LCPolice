@@ -1,31 +1,54 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import debounce from "./hooks/useDebounce";
 import { BASE_URL } from "./CONSTANTS/urls";
 import CheatersComponent from "./Components/CheatersComponent";
 import Section from "./design/Section";
 import { curve } from "./assets";
+import { TelegramSolution } from "./Context/TelegramSolContext";
 
 function Data() {
-    const [searchName, setSearchName] = useState("");
-    const [error, setError] = useState(null);
-    const [searchedUser, setSearchedUser] = useState([]);
-    const [allData, setallData] = useState([]);
     const [cheaters, setCheaters] = useState(null);
-    const [loading, setLoading] = useState(true); // Add loading state
+    const [loading, setLoading] = useState(true); 
+    const [cheatersSize, setCheatersSize] = useState();
     let location = useLocation();
-    location = location.pathname.slice(6);
+    location = location.pathname
+    location = location.slice(1, location.length-10)
 
-    const contestName = location.replaceAll('-', ' ');
+
+    const {questionId, setQuestionId} = useContext(TelegramSolution);
+    let qId = questionId
+    if(!qId){
+        qId= localStorage.getItem('questionId')
+        setQuestionId(qId)
+      
+    }
+
+    
+    const [page_no, setPage] = useState(1);
+    const [number, setNumber] = useState([]);
+
+    useEffect(() => {
+        async function fetchContestSize(){
+            const response = await fetch(BASE_URL + `getAllCheater/${qId}`);
+            const data = await response.json();
+            setCheatersSize(data.size)
+            console.log(data.size)
+          }
+          fetchContestSize();
+    }, [])
+
 
     useEffect(() => {
         async function fetchCheaters() {
             try {
-                setLoading(true); // Set loading to true before fetching data
-                let response = await fetch(BASE_URL + "/contests/" + location);
-                let cheaters = await response.json();
-                setCheaters(cheaters.cheaters_sol);
-                setallData(cheaters.cheaters_sol);
+               
+                setLoading(true); 
+                const data =await fetch(BASE_URL + `contest/${qId}?page_no=${page_no}&limit=25`);
+                const res = await data.json();
+                setCheaters(res.cheaters)
+                setNumber(Array.from({ length: parseInt((cheatersSize+24)/25)}, (_, index) => index + 1));
+
             } catch (error) {
                 console.error("Failed to fetch cheaters:", error);
             } finally {
@@ -33,27 +56,36 @@ function Data() {
             }
         }
         fetchCheaters();
-    }, [location]);
+    }, [page_no]);
 
     async function searchUser(e) {
-        if (!e.target.value) {
-            setCheaters(allData);
-            setError(null);
-            setSearchedUser([]);
-            return;
-        }
-        const searchedCheaters = allData.filter((curr) => {
-            if (curr.username.includes(e.target.value)) return curr;
-        });
-        setCheaters(searchedCheaters);
+ 
+      try{
+        setLoading(true);
+        const responseData = await fetch(BASE_URL + `contest/${questionId}?username=${e.target.value}&page_no=1&limit=25`)
+        const response = await responseData.json()
+        setCheaters(response.cheaters)
+      }catch(e){
+        window.alert(e);
+      }finally{
+        setLoading(false)
+      }
+        
     }
 
     const handleSearchUser = debounce(searchUser, 500);
 
-    function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
+function capitalizeWords(sentence) {
+    const words = sentence.split(" ");
+    const capitalizedWords = words.map(word => {
+      if (word === "") return word; 
 
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    });  
+    return capitalizedWords.join(" ");
+  }
+
+ 
     return (
         <Section
             className="pt-[12rem] -mt-[5.25rem]"
@@ -67,17 +99,7 @@ function Data() {
                     <div className="px-2 flex flex-col md:flex-row justify-between items-center gap-10">
                         <div>
                             <h1 className="h4 text-center">
-                                {capitalizeFirstLetter(contestName.slice(0, contestName.length - 2))}<br></br>
-                                <span className="inline-block relative">
-                                    Question {contestName.slice(contestName.length - 1)}
-                                    <img
-                                        src={curve}
-                                        className="absolute top-full left-0 w-full xl:-mt-2"
-                                        width={624}
-                                        height={28}
-                                        alt="Curve"
-                                    />
-                                </span>
+                               {capitalizeWords(location.replaceAll('-', ' '))}
                             </h1>
                         </div>
                         <input
@@ -111,17 +133,49 @@ function Data() {
                             {loading ? (
                                 <div className="text-white text-center mt-8">Loading...</div>
                             ) : (
+
+
+                    
+
+                                <div> 
+                                {
+                                    
                                 cheaters?.map((cheater, index) => (
                                     <CheatersComponent
                                         key={index}
                                         rank={cheater.rank}
-                                        username={cheater.username.trim()}
-                                        plagPercentage={cheater.cheatedPercentage}
-                                        contestName={contestName.slice(9, contestName.length - 2)}
+                                        username={cheater.name_of_cheater}
+                                        plagPercentage={cheater.plagpercentage}
                                         index={index}
-                                        questionNumber={contestName.slice(contestName.length - 1)}
+                                        codeId = {cheater.code}
                                     />
                                 ))
+                                }
+                                {
+                                    number?.length > 0 && <div className=" flex justify-center items-center">
+                                        <p
+                                            className={" cursor-pointer text-2xl " + (page_no == 1 && " hidden")}
+                                            onClick={() => { setPage(page_no - 1) }}
+                                        > &#x2B05;</p>
+                                        {
+                    
+                                            number.map((num, index) => {
+                                                return (
+                                                    <span onClick={() => { setPage(num) }} className={" px-2 border-2 border-gray-600 m-2 cursor-pointer bg-slate-500 rounded-lg text-lg " + (page_no == num && " bg-slate-800 scale-125 text-white")} key={index}>{num}</span>
+                                                )
+                                            })
+                    
+                                        }
+                                        <p
+                                            className={" cursor-pointer text-2xl " + (page_no == parseInt((cheatersSize+24)/25) && " hidden")}
+                                            onClick={() => { setPage(page_no + 1) }}
+                                        >&#x27A1;</p>
+                                    </div>
+                    
+                                }
+                    
+                            </div>
+                 
                             )}
                         </div>
                         <h1 className="text-white font-medium mt-2 text-center text-xl p-12"> Kudos to you for not being in the list 🎉 🥳 </h1>

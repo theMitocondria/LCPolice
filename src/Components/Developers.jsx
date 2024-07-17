@@ -57,7 +57,7 @@ const Developers = () => {
           </ul>
         </div>
       </div>
-      <div className="py-4 px-4 xl:px-8">
+      <div className="py-4  bg-n-7 px-4 xl:px-8 mt-8">
         <h4 className="h4 mb-4">Contributors</h4>
         <ul className="flex justify-start lg:flex-row gap-4 flex-wrap">
           {contributors.map((item, index) => (

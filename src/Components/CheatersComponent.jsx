@@ -1,30 +1,29 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { BASE_URL } from '../CONSTANTS/urls';
-import { TelegramSolution } from '../Context/TelegramSolContext';
 
-const CheatersComponent = ({ rank, username, plagPercentage, contestName, index, questionNumber }) => {
+const CheatersComponent = ({ rank, username, plagPercentage, index, codeId}) => {
 
   const isEven = index % 2 === 0;
-  let { teleSol, setTeleSol } = useContext(TelegramSolution);
   const [cheaterSol, setCheaterSol] = useState(null);
   const [modal, setModal] = useState(false);
-  // console.log(teleSol)
-  if (!teleSol) { setTeleSol(localStorage.getItem('telsol')); }
+  const [teleSol, setTeleSol] = useState(null)
+  let location = useLocation();
+  location = location.pathname
+  location = location.slice(1, location.length-10)
 
-  // Adjusting contestName as per your requirement
-  let actualContestName = "leetcode " + contestName;
-  actualContestName = actualContestName.replaceAll(' ', '-');
-  contestName = contestName.replace(' ', '-contest-');
 
   async function handleGetCode() {
     setModal(true);
     try {
-      const response = await fetch(BASE_URL + 'solution/' + actualContestName + '/rank/' + rank + '/' + questionNumber);
-      const sol = await response.json();
-      setCheaterSol(sol.solution.solution);
-      console.log(sol);
-      console.log(teleSol);
+      
+      setTeleSol(localStorage.getItem('teleSol'))
+      const responseCode = await fetch(BASE_URL + `solution/${codeId}`)
+      const code = await responseCode.json();
+      setCheaterSol(code.solution['code'])
+
+
+
     } catch (error) {
       console.error('Error fetching solution:', error);
     }
@@ -32,17 +31,17 @@ const CheatersComponent = ({ rank, username, plagPercentage, contestName, index,
 
   const closeModal = () => {
     setModal(false);
-    setCheaterSol(null); // Reset solution when modal is closed
+    setCheaterSol(null); 
   };
 
   const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget) { // only close modal if clicked on overlay itself, not its children
+    if (e.target === e.currentTarget) { 
       closeModal();
     }
   };
 
   return (
-    plagPercentage >= 0.85 ? (<div className={`flex items-center py-2 mt-2 rounded-sm h-12 text-gray-100 font-medium text-lg w-full ${isEven ? 'bg-n-10' : 'bg-n-11'}`}>
+    (<div className={`flex items-center py-2 mt-2 rounded-sm h-12 text-gray-100 font-medium text-lg w-full ${isEven ? 'bg-n-10' : 'bg-n-11'}`}>
       <div className="hidden w-1/3 md:w-1/5 md:flex justify-center">{rank}</div>
       <div className=" w-1/3 md:w-1/5 flex justify-center break-all text-center">{username}</div>
       <div className="hidden w-1/3  md:w-1/5 md:flex justify-center">{(plagPercentage * 100).toFixed(2)} %</div>
@@ -52,7 +51,7 @@ const CheatersComponent = ({ rank, username, plagPercentage, contestName, index,
       <div className='w-1/3  md:w-1/5 md:flex justify-center'>
         <Link
           target='_blank'
-          to={`https://leetcode.com/contest/${contestName}/ranking/${Math.ceil(rank / 25)}`}
+          to={`https://leetcode.com/contest/${location}/ranking/${Math.ceil(rank / 25)}`}
           className="flex justify-center bg-red-600 rounded-md w-fit px-4"
         >
           Report
@@ -87,7 +86,7 @@ const CheatersComponent = ({ rank, username, plagPercentage, contestName, index,
           </div>
         </div>
       )}
-    </div>) : <></>
+    </div>)
   );
 };
 
