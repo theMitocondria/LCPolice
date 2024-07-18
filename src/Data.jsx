@@ -6,6 +6,7 @@ import CheatersComponent from "./Components/CheatersComponent";
 import Section from "./design/Section";
 import { curve } from "./assets";
 import { TelegramSolution } from "./Context/TelegramSolContext";
+import CheatersShimmerUi from "./Components/CheatersShimmerUi";
 
 function Data() {
     const [cheaters, setCheaters] = useState(null);
@@ -46,16 +47,16 @@ function Data() {
                 const data =await fetch(BASE_URL + `contest/${qId}?page_no=${page_no}&limit=25`);
                 const res = await data.json();
                 setCheaters(res.cheaters)
-              setNumber(Array.from({ length: parseInt((cheatersSize+24)/25)}, (_, index) => index + 1));
+                setNumber(Array.from({ length: parseInt((cheatersSize+24)/25)}, (_, index) => index + 1));
                
 
             } catch (error) {
                 console.error("Failed to fetch cheaters:", error);
             } finally {
-                setLoading(false); // Set loading to false after fetching data
+                setLoading(false); 
             }
         }
-        fetchCheaters();
+       if(cheatersSize)  fetchCheaters();
     }, [page_no, cheatersSize]);
 
     async function searchUser(e) {
@@ -131,7 +132,7 @@ function capitalizeWords(sentence) {
                         </div>
                         <div>
                             {loading ? (
-                                <div className="text-white text-center mt-8">Loading...</div>
+                                <CheatersShimmerUi />
                             ) : (
 
 
@@ -151,7 +152,14 @@ function capitalizeWords(sentence) {
                                     />
                                 ))
                                 }
-                                {
+                        
+                    
+                            </div>
+                 
+                            )}
+                        </div>
+                        <div>
+                        {
                                     number?.length > 0 && <div className=" flex justify-center mt-4 items-center">
                                         {
                                             page_no > 3 ? <>
@@ -182,10 +190,6 @@ function capitalizeWords(sentence) {
                                     </div>
                     
                                 }
-                    
-                            </div>
-                 
-                            )}
                         </div>
                         <h1 className="text-white font-medium mt-2 text-center text-xl p-12"> Kudos to you for not being in the list 🎉 🥳 </h1>
                     </div>

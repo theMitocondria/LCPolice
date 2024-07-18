@@ -14,7 +14,7 @@ const Hero = () => {
             <div className="container relative">
                 <div className="relative z-1 max-w-[62rem] mx-auto text-center mb-[3.875rem] md:mb-20 lg:mb-[6.25rem]">
                     <h1 className="h2 mb-10">
-                        {/* Level up Fairly ! <br></br>Tired of contests rigged by cheaters? <br></br>We are too.<br></br><br></br> Introducing {" "} */}
+                        Level up Fairly ! <br></br>Tired of contests rigged by cheaters? <br></br>We are too.<br></br><br></br> Introducing {" "}
                         <span className="inline-block relative">
                             LC Police 
                              {" "}
