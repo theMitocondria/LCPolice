@@ -41,6 +41,7 @@ function App() {
 
   return (
     <>
+     <meta name="leetcode police" content="cheaters, contests, plag, plagirism, leetcode police, telegram cheaters, competitive programming, leetcode, leetcode weekly contest" />
       <Hero />
       <Section className="pt-[12rem] -mt-[5.25rem]">
         <div className="container relative">
