@@ -19,7 +19,7 @@ const ContestComponent = ({ name, question3Cheater, question4Cheater,  telegram3
   }
 
   return (
-    <div className="flex items-center justify-between bg-n-10 p-2 px-12 m-2 rounded-sm text-gray-100 font-medium text-lg w-full rounded-xl">
+    <div className="flex items-center justify-between bg-n-10 p-2 px-12 m-2 text-gray-100 font-medium text-lg w-full rounded-xl">
       <div className="w-[60%]">{name}</div>
       <div className="w-[30%] flex justify-evenly">
         <div

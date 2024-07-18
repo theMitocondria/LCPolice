@@ -118,7 +118,6 @@ function App() {
               )}
             </div>
           </div>
-{/*           <Developers /> */}
         </div>
       </Section>
     </>
