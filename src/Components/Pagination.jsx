@@ -10,12 +10,10 @@ const Pagination = ({data}) => {
         fetchData();
     }, []);
 
-    console.log(data)
 
     const fetchData = async () => {
         const response = await fetch("https://dummyjson.com/products?limit=100");
         const data = await response.json();
-        // console.log(data);
         setProducts(data?.products);
         setNumber(Array.from({ length: 9 }, (_, index) => index + 1));
     }

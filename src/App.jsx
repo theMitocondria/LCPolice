@@ -31,7 +31,6 @@ function App() {
       );
       const data = await response.json();
       setContest(data.getAll);
-      console.log(data.getAll);
       setNumber(
         Array.from({ length: (contestSize + 9) / 10 }, (_, index) => index + 1)
       );

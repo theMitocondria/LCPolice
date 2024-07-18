@@ -32,8 +32,7 @@ function Data() {
         async function fetchContestSize(){
             const response = await fetch(BASE_URL + `getAllCheater/${qId}`);
             const data = await response.json();
-            setCheatersSize(data.size)
-            console.log(data.size)
+            setCheatersSize(parseInt((data.size+24)/25))
           }
           fetchContestSize();
     }, [])
@@ -47,7 +46,8 @@ function Data() {
                 const data =await fetch(BASE_URL + `contest/${qId}?page_no=${page_no}&limit=25`);
                 const res = await data.json();
                 setCheaters(res.cheaters)
-                setNumber(Array.from({ length: parseInt((cheatersSize+24)/25)}, (_, index) => index + 1));
+              setNumber(Array.from({ length: parseInt((cheatersSize+24)/25)}, (_, index) => index + 1));
+               
 
             } catch (error) {
                 console.error("Failed to fetch cheaters:", error);
@@ -56,7 +56,7 @@ function Data() {
             }
         }
         fetchCheaters();
-    }, [page_no]);
+    }, [page_no, cheatersSize]);
 
     async function searchUser(e) {
  
@@ -152,24 +152,33 @@ function capitalizeWords(sentence) {
                                 ))
                                 }
                                 {
-                                    number?.length > 0 && <div className=" flex justify-center items-center">
-                                        <p
-                                            className={" cursor-pointer text-2xl " + (page_no == 1 && " hidden")}
-                                            onClick={() => { setPage(page_no - 1) }}
-                                        > &#x2B05;</p>
+                                    number?.length > 0 && <div className=" flex justify-center mt-4 items-center">
                                         {
-                    
-                                            number.map((num, index) => {
-                                                return (
-                                                    <span onClick={() => { setPage(num) }} className={" px-2 border-2 border-gray-600 m-2 cursor-pointer bg-slate-500 rounded-lg text-lg " + (page_no == num && " bg-slate-800 scale-125 text-white")} key={index}>{num}</span>
-                                                )
-                                            })
-                    
+                                            page_no > 3 ? <>
+                                              <span className={" px-2 border-2 border-gray-600 m-2 cursor-pointer  bg-n-10 rounded-lg text-lg "} onClick={() => setPage(1)}>{1}</span>
+                                                <span> ...</span >
+                                              
+                                             </> : <></>
                                         }
-                                        <p
-                                            className={" cursor-pointer text-2xl " + (page_no == parseInt((cheatersSize+24)/25) && " hidden")}
-                                            onClick={() => { setPage(page_no + 1) }}
-                                        >&#x27A1;</p>
+                                        {
+                                            [page_no-2, page_no-1].map((val, ind) => {
+                                                return  (val>0 ?   <span onClick={() => { setPage(val) }} className={" px-2 border-2 border-gray-600 m-2 cursor-pointer bg-n-10 rounded-lg text-lg "} key={ind}>{val}</span> : <></> )
+                                            })
+                                        }
+                                        {
+                                               <span  className={" px-2 border-2 border-gray-600 m-2 cursor-pointer rounded-lg text-lg " +" bg-n-11 scale-125 text-white"} >{page_no}</span>
+                                        }
+                                        {
+                                             [page_no+1, page_no+2].map((val, ind) => {
+                                                return  (val<=cheatersSize ?   <span onClick={() => { setPage(val) }} className={" px-2 border-2 border-gray-600 m-2 cursor-pointer bg-n-10 rounded-lg text-lg "} key={ind}>{val}</span> : <></> )
+                                            })
+                                        }
+                                        {
+                                            page_no +2 < cheatersSize ? <>
+                                                <span> ...</span >
+                                                <span className={" px-2 border-2 border-gray-600 m-2 cursor-pointer bg-n-10 rounded-lg text-lg "} onClick={() => setPage(cheatersSize)}>{cheatersSize}</span>
+                                             </> : <></>
+                                        }                                 
                                     </div>
                     
                                 }
