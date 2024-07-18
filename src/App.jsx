@@ -118,7 +118,7 @@ function App() {
               )}
             </div>
           </div>
-          <Developers />
+{/*           <Developers /> */}
         </div>
       </Section>
     </>
