@@ -116,7 +116,7 @@ function Data() {
                     </div>
                     <div className="text-[16px] md:text-[18px] text-gray-100 p-3 h-auto my-6 rounded-lg">
                         <p className="mb-2">
-                            <span className="font-medium text-lg md:text-xl underline">Exposed Code:</span> Check out the suspicious code's similarity score. Click <span className="px-3 py-1 rounded-md bg-gray-400 font-bold">Code</span> to compare the potentially leaked code with the user's submission side-by-side. If you suspect cheating, click <span className="px-3 rounded-md bg-red-500 font-bold py-1">Report</span> to flag the user directly on the contest platform. Help us maintain a fair competition by reporting confirmed cheaters.
+                            <span className="font-medium text-lg md:text-xl underline">Exposed Code:</span> Check out the suspicious code's similarity score. Click <span className="px-3 py-1 rounded-md text-black bg-gray-100 font-bold">Code</span> to compare the potentially leaked code with the user's submission side-by-side. If you suspect cheating, click <span className="px-3 rounded-md bg-red-700 font-bold py-1">Report</span> to flag the user directly on the contest platform. Help us maintain a fair competition by reporting confirmed cheaters.
                         </p>
                         <p className="mb-2">
                             <span className="font-medium text-lg md:text-xl underline">Search Suspicious:</span> Can't find someone you suspect? Don't worry, our hardware is constantly being upgraded to catch more cheaters.

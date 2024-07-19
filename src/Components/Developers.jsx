@@ -61,7 +61,7 @@ const Developers = () => {
         <h4 className="h4 mb-4">Contributors</h4>
         <ul className="flex justify-start lg:flex-row gap-4 flex-wrap">
           {contributors.map((item, index) => (
-            <div className='flex justify-center items-center flex-col'>
+            <div key={index} className='flex justify-center items-center flex-col'>
               <li
                 key={index}
                 className={`rounded-2xl flex items-center justify-center

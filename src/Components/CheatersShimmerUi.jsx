@@ -14,10 +14,10 @@ const CheatersShimmerUi = () => {
             <div className="w-1/3 md:w-1/5 flex justify-center break-all text-center shimmer">Loading</div>
             <div className="hidden w-1/3 md:w-1/5 md:flex justify-center shimmer">Loading</div>
             <div className="w-1/3 md:w-1/5 flex justify-center shimmer">
-              <button className="px-5 py-[0.5px] rounded-md bg-gray-400 flex justify-center shimmer-text">Code</button>
+              <button className="px-5 py-[0.5px] rounded-md bg-gray-100 text-black font-bold flex justify-center shimmer-text">Code</button>
             </div>
             <div className="w-1/3 md:w-1/5 md:flex justify-center shimmer">
-              <button className="flex justify-center bg-red-600 rounded-md w-fit px-4 shimmer-text">Report</button>
+              <button className="flex justify-center bg-red-700 rounded-md w-fit px-4 font-bold shimmer-text">Report</button>
             </div>
           </div>
         );
