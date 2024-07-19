@@ -1,4 +1,4 @@
-import { curve } from "../assets";
+import { curve } from "../CONSTANTS/urls";
 import Section from "../design/Section";
 import { BottomLine } from "../design/Hero";
 
