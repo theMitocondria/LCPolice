@@ -8,7 +8,7 @@ import { TelegramSolution } from "./Context/TelegramSolContext";
 import CheatersShimmerUi from "./Components/CheatersShimmerUi";
 import { Link } from "react-router-dom";
 function Data() {
-    const [cheaters, setCheaters] = useState(null);
+    const [cheaters, setCheaters] = useState([]);
     const [loading, setLoading] = useState(true);
     const [cheatersSize, setCheatersSize] = useState();
     let location = useLocation();
@@ -32,6 +32,7 @@ function Data() {
         async function fetchContestSize() {
             const response = await fetch(BASE_URL + `getAllCheater/${qId}`);
             const data = await response.json();
+            if(data.size == 0) setLoading(false)
             setCheatersSize(parseInt((data.size + 24) / 25))
         }
         fetchContestSize();
@@ -47,7 +48,7 @@ function Data() {
                 const res = await data.json();
                 setCheaters(res.cheaters)
                 setNumber(Array.from({ length: parseInt((cheatersSize + 24) / 25) }, (_, index) => index + 1));
-
+                console.log(res.cheaters)
 
             } catch (error) {
                 console.error("Failed to fetch cheaters:", error);
@@ -139,9 +140,6 @@ function Data() {
                                 <CheatersShimmerUi />
                             ) : (
 
-
-
-
                                 <div>
                                     {
 
@@ -155,6 +153,9 @@ function Data() {
                                                 codeId={cheater.code}
                                             />
                                         ))
+                                    }
+                                    {
+                                        cheaters?.length === 0 && <p className="text-red-500  flex  justify-center p-4" >Sorry, we did not run our model for this question.</p>
                                     }
 
 
