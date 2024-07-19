@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://lc-police.vercel.app/sitemap.xml
