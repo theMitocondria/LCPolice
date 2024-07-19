@@ -13,8 +13,9 @@ const ContestComponent = ({ name, question3Cheater, question4Cheater,  telegram3
   const handleCheatersClick = async(questionId, question) => {
     setQuestionId(questionId)
     localStorage.setItem('questionId', questionId);
-   if(question == 3) localStorage.setItem('teleSol', telegram3Sol);
-   else localStorage.setItem('teleSol', telegram4Sol);
+    if(question == 3) localStorage.setItem('teleSol', telegram3Sol);
+    else localStorage.setItem('teleSol', telegram4Sol);
+   
     navigate(`/${name}/cheaters/`)
   }
 
