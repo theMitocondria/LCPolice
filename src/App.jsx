@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import { BASE_URL } from "./CONSTANTS/urls";
 import ContestComponent from "./Components/ContestComponents.jsx";
-import Developers from "./Components/Developers.jsx";
 import Hero from "./Components/Hero.jsx";
 import Section from "./design/Section.jsx";
 
@@ -41,7 +40,6 @@ function App() {
 
   return (
     <>
-     <meta name="leetcode police" content="cheaters, contests, plag, plagirism, leetcode police, telegram cheaters, competitive programming, leetcode, leetcode weekly contest" />
       <Hero />
       <Section className="pt-[12rem] -mt-[5.25rem]">
         <div className="container relative">
