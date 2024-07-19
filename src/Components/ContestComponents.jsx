@@ -23,13 +23,13 @@ const ContestComponent = ({ name, question3Cheater, question4Cheater,  telegram3
       <div className="w-[60%]">{name}</div>
       <div className="w-[30%] flex justify-evenly">
         <div
-          className="pr-8 underline text-black cursor-pointer"
+          className="pr-8 underline text-white cursor-pointer"
           onClick={() => handleCheatersClick(question3Id,3)}
         >
           {question3Cheater}
         </div>
         <div
-          className="pl-2 underline text-black cursor-pointer"
+          className="pl-2 underline text-white cursor-pointer"
           onClick={() => handleCheatersClick(question4Id, 4)}
         >
           {question4Cheater}
