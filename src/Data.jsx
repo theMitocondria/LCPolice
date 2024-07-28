@@ -33,7 +33,7 @@ function Data() {
             const response = await fetch(BASE_URL + `getAllCheater/${qId}`);
             const data = await response.json();
             if(data.size == 0) setLoading(false)
-            setCheatersSize(parseInt((data.size + 24) / 25))
+            setCheatersSize(parseInt((data.size + 49) / 50))
         }
         fetchContestSize();
     }, [])
@@ -44,10 +44,10 @@ function Data() {
             try {
 
                 setLoading(true);
-                const data = await fetch(BASE_URL + `contest/${qId}?page_no=${page_no}&limit=25`);
+                const data = await fetch(BASE_URL + `contest/${qId}?page_no=${page_no}&limit=50`);
                 const res = await data.json();
                 setCheaters(res.cheaters)
-                setNumber(Array.from({ length: parseInt((cheatersSize + 24) / 25) }, (_, index) => index + 1));
+                setNumber(Array.from({ length: parseInt((cheatersSize + 49) / 50) }, (_, index) => index + 1));
                 console.log(res.cheaters)
 
             } catch (error) {
@@ -63,7 +63,7 @@ function Data() {
 
         try {
             setLoading(true);
-            const responseData = await fetch(BASE_URL + `contest/${questionId}?username=${e.target.value}&page_no=1&limit=25`)
+            const responseData = await fetch(BASE_URL + `contest/${questionId}?username=${e.target.value}&page_no=1&limit=50`)
             const response = await responseData.json()
             setCheaters(response.cheaters)
             setPage(1);
